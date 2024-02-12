@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Signup_activity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:textSize="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_margin="20dp"
+            android:text="Create Account" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:id="@+id/myusername"
+            android:hint="Enter Your Name"
+            android:inputType="text"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/myemail"
+            android:hint="Enter Email Address"
+            android:layout_margin="20dp"
+            android:inputType="textEmailAddress"
+            android:textSize="15dp"
+            android:textStyle="bold"/>
+        <EditText
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:hint="Enter Your Password"
+            android:id="@+id/mypassword"
+            android:layout_margin="20dp"
+            android:inputType="textPassword"
+            android:textSize="15dp"
+            android:textStyle="bold"/>
+        <EditText
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:hint="Enter Your Password"
+            android:id="@+id/mypassword2"
+            android:layout_margin="20dp"
+            android:inputType="textPassword"
+            android:textSize="15dp"
+            android:textStyle="bold"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="SIGN UP"
+            android:onClick="signupbtnisclicked"
+            android:textStyle="bold"
+            android:id="@+id/signupbtn"
+
+            android:backgroundTint="#0000ff"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:id="@+id/logintextvlivked"
+            android:onClick="loginTextclicked"
+            android:text="CLICK HERE TO LOG IN"
+            android:gravity="center"
+            android:textSize="18dp"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
