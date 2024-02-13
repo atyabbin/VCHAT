@@ -70,10 +70,10 @@ public class Signup_activity extends AppCompatActivity {
         }
          progressDialog = ProgressDialog.show(this, "Signing Up", "Please wait...", true);
         signupfunction(email.getText().toString(),username.getText().toString(),
-                pass1.getText().toString());
+                pass1.getText().toString(),progressDialog);
     }
 
-    private void signupfunction(String email, String name, String password) {
+    private void signupfunction(String email, String name, String password,ProgressDialog progressDialog) {
         Toast.makeText(this, email, Toast.LENGTH_SHORT).show();
         auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -98,6 +98,7 @@ public class Signup_activity extends AppCompatActivity {
                            finish();
 
                          }else{
+                             progressDialog.dismiss();
                              Toast.makeText(Signup_activity.this, "Failed..Plzz try again", Toast.LENGTH_SHORT).show();
                          }
                      }
