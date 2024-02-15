@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,6 +30,7 @@ ArrayList<users>arrayList;
 ArrayList<String>str;
 myadapter ad;
 RecyclerView recyclerView;
+FirebaseUser user;
     public Chatfrag() {
         // Required empty public constructor
     }
@@ -46,6 +49,7 @@ RecyclerView recyclerView;
         arrayList=new ArrayList<>();
         recyclerView=v.findViewById(R.id.recyclerview);
         ad=new myadapter(getContext(),arrayList);
+        user= FirebaseAuth.getInstance().getCurrentUser();
         str=new ArrayList<>();
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(ad);
@@ -61,6 +65,7 @@ RecyclerView recyclerView;
                         u.setCaption(dataSnapshot.child("caption").getValue(String.class));
                         u.setStatus(dataSnapshot.child("status").getValue(String.class));
                         u.setP(dataSnapshot.child("profile").getValue(String.class));
+                        if(!u.getUid().equals(user.getUid()))
                         arrayList.add(u);
 
 

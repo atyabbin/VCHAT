@@ -17,10 +17,15 @@ public class adapterforgroupingusers extends RecyclerView.Adapter<adapterforgrou
 
     ArrayList<users>arrayList;
     Context context;
+   static ArrayList<users>group;
+
 
     public adapterforgroupingusers(Context context, ArrayList<users>arrayList){
         this.context=context;
         this.arrayList=arrayList;
+        group=new ArrayList<>();
+
+
 
 
     }
@@ -41,9 +46,11 @@ public class adapterforgroupingusers extends RecyclerView.Adapter<adapterforgrou
                 if(!holder.isticked){
                     holder.tick.setVisibility(View.VISIBLE);
                     holder.isticked=true;
+                    group.add(arrayList.get(holder.getAdapterPosition()));
                 }else{
                     holder.tick.setVisibility(View.GONE);
                     holder.isticked=false;
+                    group.remove(arrayList.get(holder.getAdapterPosition()));
                 }
 
 
