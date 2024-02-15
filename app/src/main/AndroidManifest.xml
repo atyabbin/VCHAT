@@ -13,6 +13,9 @@
         android:theme="@style/Theme.VChatApp2"
         tools:targetApi="31">
         <activity
+            android:name=".GroupChat_activity"
+            android:exported="false" />
+        <activity
             android:name=".Create_group_activity"
             android:exported="false" />
         <activity

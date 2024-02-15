@@ -65,8 +65,9 @@ FirebaseUser user;
                         u.setCaption(dataSnapshot.child("caption").getValue(String.class));
                         u.setStatus(dataSnapshot.child("status").getValue(String.class));
                         u.setP(dataSnapshot.child("profile").getValue(String.class));
-                        if(!u.getUid().equals(user.getUid()))
-                        arrayList.add(u);
+                        if(!u.getUid().equals(user.getUid())) {
+                            arrayList.add(u);
+                        }
 
 
                     }

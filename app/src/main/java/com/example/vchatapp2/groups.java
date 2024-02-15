@@ -1,8 +1,9 @@
 package com.example.vchatapp2;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class groups {
+public class groups implements Serializable {
     String groupname,uid;
 
     public String getUid() {

@@ -66,10 +66,12 @@ public class messageadapter extends RecyclerView.Adapter<messageadapter.ViewHold
                     if(snapshot.exists()){
                         String likes=snapshot.getValue(String.class);
                         if(likes!=null){
-                            if(likes.equals("1"))
+                            if(likes.equals("1")) {
                                 holder.liked.setImageResource(R.drawable.heartfilled);
-                            else
+                            }
+                            else {
                                 holder.liked.setImageResource(R.drawable.heartunfilled);
+                            }
                         }
                     }
                 }

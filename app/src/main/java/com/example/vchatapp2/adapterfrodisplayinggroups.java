@@ -1,6 +1,7 @@
 package com.example.vchatapp2;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,15 @@ public class adapterfrodisplayinggroups extends RecyclerView.Adapter<adapterfrod
     @Override
     public void onBindViewHolder(@NonNull adapterfrodisplayinggroups.ViewHolder holder, int position) {
            holder.t.setText(arrayList.get(position).getGroupname());
+           holder.itemView.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View view) {
+                   Intent i=new Intent(context, GroupChat_activity.class);
+                   i.putExtra("group",arrayList.get(holder.getAdapterPosition()));
+                   context.startActivity(i);
+
+               }
+           });
     }
 
     @Override
