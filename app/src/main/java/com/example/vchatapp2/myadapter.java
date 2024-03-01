@@ -22,6 +22,7 @@ import java.util.ArrayList;
 public class myadapter extends RecyclerView.Adapter<myadapter.ViewHolder>{
 
     private final ArrayList<users> arrayList;
+
     private final Context context;
 
     public myadapter(Context context, ArrayList<users>arrayList){
@@ -80,6 +81,8 @@ holder.itemView.setOnClickListener(new View.OnClickListener() {
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView namestr,statusstr,captionstr;
         ImageView img;
+        ValueEventListener valueEventListener;
+        DatabaseReference dbs;
         int f=0;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

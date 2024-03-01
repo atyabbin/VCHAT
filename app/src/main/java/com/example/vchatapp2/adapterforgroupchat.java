@@ -23,6 +23,7 @@ public class adapterforgroupchat extends RecyclerView.Adapter<adapterforgroupcha
     ArrayList<GroupMessages>arrayList;
     groups g;
 
+
     public adapterforgroupchat(ArrayList<GroupMessages>arrayList, Context context,groups cu){
         g=cu;
         this.arrayList=arrayList;
