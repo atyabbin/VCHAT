@@ -31,6 +31,9 @@ RecyclerView recyclerView;
 adapterfrodisplayinggroups ad;
 FirebaseAuth mauth;
 FirebaseUser user;
+    DatabaseReference reference;
+ValueEventListener valueEventListener;
+
 
     public Groupfrag() {
         // Required empty public constructor
@@ -51,42 +54,44 @@ FirebaseUser user;
         ad=new adapterfrodisplayinggroups(getContext(),arrayList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(ad);
-        DatabaseReference reference= FirebaseDatabase.getInstance().getReference("Groups");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
+         reference= FirebaseDatabase.getInstance().getReference("Groups");
+         valueEventListener=new ValueEventListener() {
+             @Override
+             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                 if(snapshot.exists()){
 
-                    for(DataSnapshot dataSnapshot:snapshot.getChildren()) {
+                     for(DataSnapshot dataSnapshot:snapshot.getChildren()) {
 
-                        groups g = new groups();
-                        ArrayList<String >s=new ArrayList<>();
-                        g.setGroupname(dataSnapshot.child("Name").getValue(String.class));
-                        g.setUid(dataSnapshot.getKey());
-                        try {
-                            for (int i = 0; i < dataSnapshot.getChildrenCount() - 2; i++) {
-                                s.add(dataSnapshot.child(i + "").getValue(String.class));
-                            }
-                        }catch (Exception e){
+                         groups g = new groups();
+                         ArrayList<String >s=new ArrayList<>();
+                         g.setGroupname(dataSnapshot.child("Name").getValue(String.class));
+                         g.setUid(dataSnapshot.getKey());
+                         try {
+                             for (int i = 0; i < dataSnapshot.getChildrenCount() - 2; i++) {
+                                 s.add(dataSnapshot.child(i + "").getValue(String.class));
+                             }
+                         }catch (Exception e){
 
-                        }
-                       g.setMembers(s);
-                       if(!g.ispresent(arrayList,g)&&g.members.contains(user.getUid()))
-                           arrayList.add(g);
-                        ad.notifyDataSetChanged();
+                         }
+                         g.setMembers(s);
+                         if(!g.ispresent(arrayList,g)&&g.members.contains(user.getUid()))
+                             arrayList.add(g);
+                         ad.notifyDataSetChanged();
 
-                    }
+                     }
 
 
 
-                }
-            }
+                 }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+             }
 
-            }
-        });
+             @Override
+             public void onCancelled(@NonNull DatabaseError error) {
+
+             }
+         };
+        reference.addValueEventListener(valueEventListener);
         addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,5 +102,11 @@ FirebaseUser user;
 
 
         return  v;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        reference.removeEventListener(valueEventListener);
     }
 }

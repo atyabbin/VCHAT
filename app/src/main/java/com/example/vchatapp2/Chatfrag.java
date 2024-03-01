@@ -87,4 +87,11 @@ FirebaseUser user;
 
         return v;
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Toast.makeText(getContext(), "destroyed", Toast.LENGTH_SHORT).show();
+        ad.removealllisteners();
+    }
 }

@@ -106,4 +106,10 @@ messageadapter messageadapter;
         reference.child("messages").push().setValue(hashMap);
 
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        messageadapter.removeallevents();
+    }
 }

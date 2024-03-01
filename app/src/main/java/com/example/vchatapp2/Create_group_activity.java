@@ -33,12 +33,15 @@ public class Create_group_activity extends AppCompatActivity {
     FirebaseUser user;
     Button btn;
     EditText edt;
+    ArrayList<eventlisteners>allevents;
+    ValueEventListener valueEventListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_group);
         arrayList=new ArrayList<>();
+        allevents=new ArrayList<>();
         str=new ArrayList<>();
         edt=findViewById(R.id.editTextText3);
         btn=findViewById(R.id.button2);
@@ -81,7 +84,7 @@ public class Create_group_activity extends AppCompatActivity {
         });
 
         DatabaseReference reference=FirebaseDatabase.getInstance().getReference("Users");
-        reference.addValueEventListener(new ValueEventListener() {
+        valueEventListener=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()) {
@@ -100,15 +103,24 @@ public class Create_group_activity extends AppCompatActivity {
 
                     }
                 }
-                //Toast.makeText(getContext(), arrayList.get(0).getName(), Toast.LENGTH_SHORT).show();
                 ad.notifyDataSetChanged();
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        };
+        reference.addValueEventListener(valueEventListener);
+        allevents.add(new eventlisteners(reference,valueEventListener));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        for(int i=0;i<allevents.size();i++)
+            allevents.get(i).getDb().removeEventListener(allevents.get(i).getVl());
+
+      //  Toast.makeText(this, "Destroyed", Toast.LENGTH_SHORT).show();
     }
 }

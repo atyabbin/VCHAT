@@ -26,10 +26,14 @@ public class messageadapter extends RecyclerView.Adapter<messageadapter.ViewHold
     public static int msg_right=1;
     public static int msg_left=0;
     ArrayList<messages>arrayList;
+   ArrayList<eventlisteners>allevents;
 
     public  messageadapter(Context context, ArrayList<messages>arrayList){
         this.context=context;
         this.arrayList=arrayList;
+        allevents=new ArrayList<>();
+
+
 
 
 
@@ -58,8 +62,8 @@ public class messageadapter extends RecyclerView.Adapter<messageadapter.ViewHold
         holder.msg.setText(message.getMsg());
 
         DatabaseReference reference=FirebaseDatabase.getInstance().getReference("messages");
-        if (holder.f == 0) {
-            holder.f=1;
+
+
             holder.listener= new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -82,8 +86,10 @@ public class messageadapter extends RecyclerView.Adapter<messageadapter.ViewHold
                 }
             };
             reference.child(arrayList.get(holder.getAdapterPosition()).getMsgid()).child("likes").addValueEventListener(holder.listener);
+            allevents.add(new eventlisteners(reference, holder.listener));
 
-        }
+
+
 
 
         holder.liked.setOnClickListener(new View.OnClickListener() {
@@ -114,6 +120,10 @@ public class messageadapter extends RecyclerView.Adapter<messageadapter.ViewHold
 
 
 
+    }
+    public void removeallevents(){
+        for(int i=0;i<allevents.size();i++)
+            allevents.get(i).getDb().removeEventListener(allevents.get(i).getVl());
     }
 
     @Override

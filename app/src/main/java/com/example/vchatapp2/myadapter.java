@@ -22,12 +22,14 @@ import java.util.ArrayList;
 public class myadapter extends RecyclerView.Adapter<myadapter.ViewHolder>{
 
     private final ArrayList<users> arrayList;
+    ArrayList<eventlisteners>myarr;
 
     private final Context context;
 
     public myadapter(Context context, ArrayList<users>arrayList){
         this.arrayList=arrayList;
         this.context=context;
+        myarr=new ArrayList<>();
     }
     @NonNull
     @Override
@@ -43,20 +45,23 @@ return viewHolder;
         if(holder.f==0){
             holder.f=1;
             DatabaseReference reference= FirebaseDatabase.getInstance().getReference("Users").child(arrayList.get(holder.getAdapterPosition()).getUid()).child("status");
-            reference.addValueEventListener(new ValueEventListener() {
+            holder.valueEventListener=new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(snapshot.exists()){
                         String status=snapshot.getValue(String.class);
                         holder.statusstr.setText(status);
                     }
+
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });
+            };
+            reference.addValueEventListener(holder.valueEventListener);
+            myarr.add(new eventlisteners(reference, holder.valueEventListener,holder));
         }
 
         holder.captionstr.setText(arrayList.get(position).getCaption());
@@ -71,6 +76,13 @@ holder.itemView.setOnClickListener(new View.OnClickListener() {
 });
 
 
+    }
+
+    public void removealllisteners(){
+        for(int i=0;i<myarr.size();i++){
+            myarr.get(i).getDb().removeEventListener(myarr.get(i).getVl());
+            myarr.get(i).getHolder().f=0;
+        }
     }
 
     @Override

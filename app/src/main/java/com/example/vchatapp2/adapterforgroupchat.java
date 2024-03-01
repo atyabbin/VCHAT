@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 public class adapterforgroupchat extends RecyclerView.Adapter<adapterforgroupchat.ViewHolder> {
     Context context;
     ArrayList<GroupMessages>arrayList;
+    ArrayList<eventlisteners>allevents;
     groups g;
 
 
@@ -28,6 +30,7 @@ public class adapterforgroupchat extends RecyclerView.Adapter<adapterforgroupcha
         g=cu;
         this.arrayList=arrayList;
         this.context=context;
+        allevents=new ArrayList<>();
 
     }
     @NonNull
@@ -51,8 +54,9 @@ public class adapterforgroupchat extends RecyclerView.Adapter<adapterforgroupcha
         holder.msg.setText(arrayList.get(position).getMsg());
 
 
-        if(holder.f==0){
-            FirebaseDatabase.getInstance().getReference("Groups").child(g.getUid()).child("messages").child(arrayList.get(holder.getAdapterPosition()).getUid()).addValueEventListener(new ValueEventListener() {
+
+            DatabaseReference reference=FirebaseDatabase.getInstance().getReference("Groups").child(g.getUid()).child("messages").child(arrayList.get(holder.getAdapterPosition()).getUid());
+            holder.valueEventListener=new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(snapshot.exists()){
@@ -63,14 +67,17 @@ public class adapterforgroupchat extends RecyclerView.Adapter<adapterforgroupcha
                             holder.img.setImageResource(R.drawable.heartunfilled);
                         }
                     }
+
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });
-        }
+            };
+            reference.addValueEventListener(holder.valueEventListener);
+            allevents.add(new eventlisteners(reference, holder.valueEventListener));
+
 
 
 
@@ -100,6 +107,11 @@ public class adapterforgroupchat extends RecyclerView.Adapter<adapterforgroupcha
         });
     }
 
+    public void removeallevents(){
+        for(int i=0;i<allevents.size();i++)
+            allevents.get(i).getDb().removeEventListener(allevents.get(i).getVl());
+    }
+
     @Override
     public int getItemCount() {
         return arrayList.size();
@@ -108,6 +120,7 @@ public class adapterforgroupchat extends RecyclerView.Adapter<adapterforgroupcha
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView name,msg;
         ImageView img;
+        ValueEventListener valueEventListener;
         int f=0;
         public ViewHolder(@NonNull View itemView,int type) {
             super(itemView);

@@ -130,5 +130,9 @@ public class GroupChat_activity extends AppCompatActivity {
 
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ad.removeallevents();
+    }
 }

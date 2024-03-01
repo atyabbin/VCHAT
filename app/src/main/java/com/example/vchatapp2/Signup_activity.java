@@ -90,7 +90,7 @@ public class Signup_activity extends AppCompatActivity {
                      @Override
                      public void onComplete(@NonNull Task<Void> task) {
                          if(task.isSuccessful()){
-                          Intent i=new Intent(Signup_activity.this,setprofile_activity.class);
+                          Intent i=new Intent(Signup_activity.this,MainDisplayActivity.class);
                            i.putExtra("userid",userid);
                            i.putExtra("username",name);
                            startActivity(i);
