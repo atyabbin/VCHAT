@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,9 +42,18 @@ return viewHolder;
 
     @Override
     public void onBindViewHolder(@NonNull myadapter.ViewHolder holder, int position) {
+       holder.itemView.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               Intent i=new Intent(context, onechat_activity.class);
+               i.putExtra("friendid",arrayList.get(position).getUid());
+               i.putExtra("friendname",arrayList.get(position).getName());
+               context.startActivity(i);
+           }
+       });
         holder.namestr.setText(arrayList.get(position).getName());
-        if(holder.f==0){
-            holder.f=1;
+       
+
             DatabaseReference reference= FirebaseDatabase.getInstance().getReference("Users").child(arrayList.get(holder.getAdapterPosition()).getUid()).child("status");
             holder.valueEventListener=new ValueEventListener() {
                 @Override
@@ -52,6 +62,7 @@ return viewHolder;
                         String status=snapshot.getValue(String.class);
                         holder.statusstr.setText(status);
                     }
+
 
                 }
 
@@ -62,18 +73,10 @@ return viewHolder;
             };
             reference.addValueEventListener(holder.valueEventListener);
             myarr.add(new eventlisteners(reference, holder.valueEventListener,holder));
-        }
+
 
         holder.captionstr.setText(arrayList.get(position).getCaption());
-holder.itemView.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        Intent i=new Intent(context, onechat_activity.class);
-        i.putExtra("friendid",arrayList.get(position).getUid());
-        i.putExtra("friendname",arrayList.get(position).getName());
-        context.startActivity(i);
-    }
-});
+
 
 
     }
