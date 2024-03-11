@@ -5,11 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,15 +37,19 @@ public class onechat_activity extends AppCompatActivity {
     FirebaseAuth mauth;
     FirebaseUser user;
     ArrayList<messages>arrayList;
+    Toolbar toolbar;
     RecyclerView msgrecyclerview;
     ArrayList<String >msgid;
 messageadapter messageadapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_onechat);
         t=findViewById(R.id.textView11);
         send=findViewById(R.id.imageButton);
+        toolbar=findViewById(R.id.toolbar2);
+        setSupportActionBar(toolbar);
         msg=findViewById(R.id.editTextText);
         msgid=new ArrayList<>();
         mauth=FirebaseAuth.getInstance();
@@ -111,5 +121,48 @@ messageadapter messageadapter;
     protected void onDestroy() {
         super.onDestroy();
         messageadapter.removeallevents();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.mymenu2,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId()==R.id.location){
+            Intent i=new Intent(this,MapsActivity.class);
+            DatabaseReference mref=FirebaseDatabase.getInstance().getReference("Location").child(frienduserid);
+            mref.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        // User ID exists in the database
+                        double latitude = snapshot.child("latitude").getValue(Double.class);
+                        double longitude = snapshot.child("longitude").getValue(Double.class);
+                        i.putExtra("lat",latitude+"");
+                        i.putExtra("long",longitude+"");
+                        startActivity(i);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+            return true;
+        }
+
+        else{
+           Intent i=new Intent(this, callactivity.class);
+           i.putExtra("username",friendname);
+           i.putExtra("userid",frienduserid);
+           startActivity(i);
+            return true;
+        }
     }
 }

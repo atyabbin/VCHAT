@@ -11,10 +11,7 @@
         android:id="@+id/linearLayout3"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
+
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,13 +19,22 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme" />
+
         <TextView
             android:id="@+id/textView11"
 
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="0dp"
             android:layout_gravity="center"
-            android:layout_weight="10"
+            android:layout_weight="0.5"
             android:gravity="center"
             android:text="TextView"
             android:textSize="24dp"
@@ -38,17 +44,17 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/chatsrecyclerview"
             android:layout_width="match_parent"
-            android:layout_below="@id/textView11"
+            android:layout_height="0dp"
             android:layout_above="@id/xyx"
-            android:layout_height="match_parent"
-            android:layout_weight="20" />
+            android:layout_below="@id/textView11"
+            android:layout_weight="8" />
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/xyx"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+
             android:layout_weight="1"
-            android:layout_margin="14dp"
             android:orientation="horizontal">
 
             <EditText

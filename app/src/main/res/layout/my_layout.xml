@@ -10,11 +10,12 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:background="@drawable/backg"
+        android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        app:cardCornerRadius="20dp"
+        android:background="@drawable/backg"
         android:elevation="20dp"
-        android:layout_height="wrap_content">
+
+        app:cardCornerRadius="20dp">
 
 
         <LinearLayout
