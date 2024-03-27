@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class myadapter extends RecyclerView.Adapter<myadapter.ViewHolder>{
 
@@ -26,6 +28,7 @@ public class myadapter extends RecyclerView.Adapter<myadapter.ViewHolder>{
     ArrayList<eventlisteners>myarr;
 
     private final Context context;
+    int back[]={R.drawable.card,R.drawable.card1,R.drawable.card2,R.drawable.card3,R.drawable.card4};
 
     public myadapter(Context context, ArrayList<users>arrayList){
         this.arrayList=arrayList;
@@ -42,6 +45,12 @@ return viewHolder;
 
     @Override
     public void onBindViewHolder(@NonNull myadapter.ViewHolder holder, int position) {
+        Random random = new Random();
+
+        // Generate a random integer between 0 and 4 (inclusive)
+        int r = random.nextInt(5);
+
+        holder.layout.setBackgroundResource(back[r]);
        holder.itemView.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
@@ -98,6 +107,7 @@ return viewHolder;
         ImageView img;
         ValueEventListener valueEventListener;
         DatabaseReference dbs;
+        LinearLayout layout;
         int f=0;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -105,6 +115,7 @@ return viewHolder;
             captionstr=itemView.findViewById(R.id.textView8);
             statusstr=itemView.findViewById(R.id.textView9);
             img=itemView.findViewById(R.id.imageView);
+            layout=itemView.findViewById(R.id.mylinear);
         }
     }
 }

@@ -12,15 +12,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:background="@drawable/backg"
+
         android:elevation="20dp"
 
         app:cardCornerRadius="20dp">
 
 
         <LinearLayout
+            android:id="@+id/mylinear"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
+            android:background="@drawable/card"
             android:orientation="horizontal">
 
             <ImageView

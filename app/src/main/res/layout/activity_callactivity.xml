@@ -28,7 +28,7 @@
 
 
         <com.zegocloud.uikit.prebuilt.call.invite.widget.ZegoSendCallInvitationButton
-            android:id="@+id/videocall"
+            android:id="@+id/vidcall"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
@@ -36,7 +36,7 @@
             android:gravity="center" />
 
         <com.zegocloud.uikit.prebuilt.call.invite.widget.ZegoSendCallInvitationButton
-            android:id="@+id/voicecall"
+            android:id="@+id/vcall"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center"

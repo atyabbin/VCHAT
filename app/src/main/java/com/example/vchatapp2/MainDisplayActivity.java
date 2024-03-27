@@ -54,6 +54,7 @@ TabLayout tb;
 FirebaseAuth mauth;
 FirebaseUser currentuser;
 DatabaseReference mdatabase;
+String username;
     private static final int REQUEST_CODE = 100;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private LocationCallback locationCallback;
@@ -70,8 +71,26 @@ DatabaseReference mdatabase;
         viewPager.setAdapter(fragmentadapter);
 tb.setupWithViewPager(viewPager);
 mauth=FirebaseAuth.getInstance();
-currentuser=mauth.getCurrentUser();
-prepareforcall(currentuser.getUid());
+        currentuser=mauth.getCurrentUser();
+DatabaseReference reference=FirebaseDatabase.getInstance().getReference("Users").child(currentuser.getUid());
+reference.addListenerForSingleValueEvent(new ValueEventListener() {
+    @Override
+    public void onDataChange(@NonNull DataSnapshot snapshot) {
+        if(snapshot.exists()){
+            username=snapshot.child("username").getValue(String.class);
+           // Toast.makeText(MainDisplayActivity.this, username, Toast.LENGTH_SHORT).show();
+            currentuser=mauth.getCurrentUser();
+
+            prepareforcall(currentuser.getUid());
+        }
+    }
+
+    @Override
+    public void onCancelled(@NonNull DatabaseError error) {
+
+    }
+});
+
 FirebaseDatabase.getInstance().getReference("Users").child(currentuser.getUid()).child("status").
         setValue("online").addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -107,10 +126,10 @@ FirebaseDatabase.getInstance().getReference("Users").child(currentuser.getUid())
 
     private void prepareforcall(String uid) {
         Application application = getApplication(); // Android's application context
-        long appID =36057687 ;   // yourAppID
-        String appSign ="e8dfde326a512bdf40774bbb7cb61b98446f42ad03db3afcfa075688b30d5721";  // yourAppSign
+        long appID =171565141 ;   // yourAppID
+        String appSign ="e2008998c0f02fe7553312621ec95049ebaa5b6461b40bd21f52d50c7216b332";  // yourAppSign
         String userID =uid; // yourUserID, userID should only contain numbers, English characters, and '_'.
-        String userName =uid;   // yourUserName
+        String userName =username;   // yourUserName
 
         ZegoUIKitPrebuiltCallInvitationConfig callInvitationConfig = new ZegoUIKitPrebuiltCallInvitationConfig();
         ZegoNotificationConfig zegoNotificationConfig=new ZegoNotificationConfig();
