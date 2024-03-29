@@ -27,6 +27,16 @@
             android:src="@drawable/vid" />
 
 
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_margin="15dp"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
         <com.zegocloud.uikit.prebuilt.call.invite.widget.ZegoSendCallInvitationButton
             android:id="@+id/vidcall"
             android:layout_width="100dp"

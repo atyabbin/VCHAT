@@ -91,7 +91,7 @@ FirebaseUser user;
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Toast.makeText(getContext(), "destroyed", Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getContext(), "destroyed", Toast.LENGTH_SHORT).show();
         ad.removealllisteners();
     }
 }

@@ -1,6 +1,8 @@
 package com.example.vchatapp2;
 
 import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +15,11 @@ public class callactivity extends AppCompatActivity {
     String userid,name;
     ZegoSendCallInvitationButton videocall;
     ZegoSendCallInvitationButton voicecall;
+    int p=0;
+    ImageView img;
+    int prifles[]={R.drawable.profile10,R.drawable.profile11,R.drawable.profile8,
+            R.drawable.profile9,R.drawable.boypic,R.drawable.profile2,R.drawable.profile3,R.drawable.profile4,
+            R.drawable.profile5,R.drawable.profile6};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +27,11 @@ public class callactivity extends AppCompatActivity {
         setContentView(R.layout.activity_callactivity);
         name=getIntent().getStringExtra("username");
         userid=getIntent().getStringExtra("userid");
+        p=Integer.parseInt(getIntent().getStringExtra("profile"));
+        img=findViewById(R.id.imageView15);
+        img.setImageResource(prifles[p]);
+        TextView t=findViewById(R.id.textView4);
+        t.setText(name.toUpperCase());
 
 
         videocall=findViewById(R.id.vidcall);

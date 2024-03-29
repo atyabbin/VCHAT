@@ -18,6 +18,9 @@ public class adapterforgroupingusers extends RecyclerView.Adapter<adapterforgrou
     ArrayList<users>arrayList;
     Context context;
    static ArrayList<users>group;
+    int prifles[]={R.drawable.profile10,R.drawable.profile11,R.drawable.profile8,
+            R.drawable.profile9,R.drawable.boypic,R.drawable.profile2,R.drawable.profile3,R.drawable.profile4,
+            R.drawable.profile5,R.drawable.profile6};
 
 
     public adapterforgroupingusers(Context context, ArrayList<users>arrayList){
@@ -40,6 +43,9 @@ public class adapterforgroupingusers extends RecyclerView.Adapter<adapterforgrou
     @Override
     public void onBindViewHolder(@NonNull adapterforgroupingusers.ViewHolder holder, int position) {
         holder.name.setText(arrayList.get(position).getName());
+        int p= Integer.parseInt(arrayList.get(position).getP());
+        holder.img.setImageResource(prifles[p]);
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

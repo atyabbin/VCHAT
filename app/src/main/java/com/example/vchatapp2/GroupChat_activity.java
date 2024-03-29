@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -127,6 +128,13 @@ public class GroupChat_activity extends AppCompatActivity {
             }
         });
         edt.setText("");
+
+    }
+
+    public void groupisclicked(View v){
+        Intent i=new Intent(this, display_group_info.class);
+        i.putExtra("group",g);
+        startActivity(i);
 
     }
 

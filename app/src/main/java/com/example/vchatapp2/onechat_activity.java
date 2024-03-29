@@ -39,6 +39,8 @@ public class onechat_activity extends AppCompatActivity {
     ArrayList<messages>arrayList;
     Toolbar toolbar;
     RecyclerView msgrecyclerview;
+    int p=0;
+
     ArrayList<String >msgid;
 messageadapter messageadapter;
 
@@ -90,6 +92,8 @@ messageadapter messageadapter;
         user=mauth.getCurrentUser();
         friendname=getIntent().getStringExtra("friendname");
         frienduserid=getIntent().getStringExtra("friendid");
+        p=Integer.parseInt(getIntent().getStringExtra("profile"));
+
         t.setText(friendname);
         send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,6 +165,7 @@ messageadapter messageadapter;
            Intent i=new Intent(this, callactivity.class);
            i.putExtra("username",friendname);
            i.putExtra("userid",frienduserid);
+           i.putExtra("profile",p+"");
            startActivity(i);
             return true;
         }

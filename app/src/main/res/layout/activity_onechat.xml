@@ -12,6 +12,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
 
+
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,6 +33,7 @@
             android:id="@+id/textView11"
 
             android:layout_width="match_parent"
+            android:background="#CACACF"
             android:layout_height="0dp"
             android:layout_gravity="center"
             android:layout_weight="0.5"
@@ -44,6 +46,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/chatsrecyclerview"
             android:layout_width="match_parent"
+
             android:layout_height="0dp"
             android:layout_above="@id/xyx"
             android:layout_below="@id/textView11"

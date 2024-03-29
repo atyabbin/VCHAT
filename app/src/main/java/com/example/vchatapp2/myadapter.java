@@ -26,6 +26,9 @@ public class myadapter extends RecyclerView.Adapter<myadapter.ViewHolder>{
 
     private final ArrayList<users> arrayList;
     ArrayList<eventlisteners>myarr;
+    int prifles[]={R.drawable.profile10,R.drawable.profile11,R.drawable.profile8,
+    R.drawable.profile9,R.drawable.boypic,R.drawable.profile2,R.drawable.profile3,R.drawable.profile4,
+    R.drawable.profile5,R.drawable.profile6};
 
     private final Context context;
     int back[]={R.drawable.card,R.drawable.card1,R.drawable.card2,R.drawable.card3,R.drawable.card4};
@@ -50,13 +53,14 @@ return viewHolder;
         // Generate a random integer between 0 and 4 (inclusive)
         int r = random.nextInt(5);
 
-        holder.layout.setBackgroundResource(back[r]);
+       // holder.layout.setBackgroundResource(back[r]);
        holder.itemView.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
                Intent i=new Intent(context, onechat_activity.class);
                i.putExtra("friendid",arrayList.get(position).getUid());
                i.putExtra("friendname",arrayList.get(position).getName());
+               i.putExtra("profile",arrayList.get(position).getP());
                context.startActivity(i);
            }
        });
@@ -85,6 +89,10 @@ return viewHolder;
 
 
         holder.captionstr.setText(arrayList.get(position).getCaption());
+        int p= Integer.parseInt(arrayList.get(holder.getAdapterPosition()).getP());
+       //p--;
+        holder.img.setImageResource(prifles[p]);
+
 
 
 
